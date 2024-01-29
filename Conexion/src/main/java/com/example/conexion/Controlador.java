@@ -130,7 +130,7 @@ public class Controlador {
     @FXML
     protected void CambiarPantalla() throws IOException {
         conexion.desconectar();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("seguandaPantalla.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("segundaPantalla.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Insertar mecanicos");
