@@ -238,7 +238,7 @@ public class Controlador {
 
         // Eliminar la última coma si algún valor fue actualizado
         if (!algunValorActualizado) {
-            mostrarMensaje("Advertencia", "Ningún campo actualizado", "Por favor, escribe al menos un campo antes de intentar actualizar.");
+            mostrarMensaje("Advertencia", "Ningún campo actualizado", "Por favor, escribe al menos en un campo antes de intentar actualizar.");
             return;
         }
         if (algunValorActualizado) {
@@ -313,15 +313,6 @@ public class Controlador {
 
 
 
-    // Método auxiliar para verificar si todos los campos están vacíos
-    private boolean camposVacios(String... campos) {
-        for (String campo : campos) {
-            if (!campo.isEmpty()) {
-                return false; // Al menos un campo no está vacío
-            }
-        }
-        return true; // Todos los campos están vacíos
-    }
 
     // Método auxiliar para mostrar mensajes
     private void mostrarMensaje(String titulo, String encabezado, String contenido) {
