@@ -1,0 +1,512 @@
+
+create sequence sec_identificador 
+
+
+
+	start with 0  -- siempre tiene que comenzar al menos x 1
+
+
+
+	increment by 1
+
+
+
+	minvalue 0
+
+
+
+	maxvalue 999999
+
+
+
+	cycle;
+
+
+
+
+
+alter sequence sec_identificador
+
+
+
+no cycle;
+
+
+
+
+
+
+
+select nextval ('sec_identificador');
+
+
+
+
+
+
+
+--Creamos un objeto.........create type "objeto"
+
+
+
+-- Si no pones al char varying un valor max se pone el valor max del tipo de dato
+
+
+
+-- Si al char no le ponemos el tamaño el max es 1 asi q ¡ojoo!
+
+
+
+-- En un objeto NO SE PUEDE PONER PRIMARY KEY
+
+
+
+-- Los objetos se ven en Schemas/Types
+
+
+
+-- El varchar se lo traga pero no existe en pgadmin
+
+
+
+
+
+
+
+create type direccion_type as(
+
+
+
+	num integer,
+
+
+
+	calle char(25),
+
+
+
+	ciudad char varying(50),
+
+
+
+	cp char(5)
+
+
+
+);
+
+
+
+
+
+
+
+create type persona_type as(
+
+
+
+	nombre char varying(50),
+
+
+
+	direccion direccion_type
+
+
+
+);
+
+
+
+
+
+
+
+
+
+
+
+--Si ponemos serial no hay que decir que es un dato integer lo toma como tal x defecto
+
+
+
+--Se puede guardar el tlf como es multivaluado como un array añadiendo []
+
+
+
+create table clientes(
+
+
+
+	idCliente serial primary key,
+
+
+
+	persona persona_type,
+
+
+
+	tlf char(12)[]
+
+
+
+);
+
+
+
+
+
+
+
+create type empleados_type as(
+
+
+
+	persona persona_type,
+
+
+
+	pass char varying(50),
+
+
+
+	nomina char(20),
+
+
+
+	horario date, 
+
+
+
+	NUSS bigint
+
+
+
+);
+
+
+
+
+
+
+
+--Para usar la secuencia que hemos creado hay q usar el
+
+
+
+--Default nextval('nombre secuencia') y determinar 
+
+
+
+--El tipo de la secuencia en este caso integer.
+
+
+
+create table administradores(
+
+
+
+	idAdmin integer primary key default nextval('sec_identificador'),
+
+
+
+	edad integer,
+
+
+
+	fechaNac date,
+
+
+
+	tlfCorporativo char(12),
+
+
+
+	empleados empleados_type
+
+
+
+);
+
+
+
+
+
+
+
+create type especialidad as enum('chapista','soldador','pintor');
+
+
+
+--si creas un trigger para incrementar el contador y n pones valor x defecto 
+
+
+
+--da error pq x defecto si n añades el default es null y n se puede incrementar un null.
+
+
+
+create table mecanico(
+
+
+
+	idMecanico integer primary key default nextval('sec_identificador'),
+
+
+
+	rol especialidad,
+
+
+
+	contHoras integer default 0,
+
+
+
+	seguro char varying(50),
+
+
+
+	empleados empleados_type
+
+
+
+);
+
+
+
+
+
+
+
+
+
+
+
+create table vehiculos(
+
+
+
+	matricula char varying(7) primary key,
+
+
+
+	marca char(10),
+
+
+
+	modelo char(10),
+
+
+
+	fichaTecnica char varying(100),
+
+
+
+	seguro char varying(50)
+
+
+
+);
+
+
+
+
+
+
+
+create table clientes_vehiculos(
+
+
+
+	matricula char varying(7),
+
+
+
+	idCliente integer,
+
+
+
+	primary key (matricula, idCliente),
+
+
+
+	foreign key (matricula) references vehiculos(matricula) on delete cascade,
+
+
+
+	foreign key (idCliente) references clientes(idCliente) on delete cascade
+
+
+
+);
+
+
+
+
+
+
+
+
+
+
+
+--inherits vehiculos se usa para heredar todo lo de la tabla de vehiculos
+
+
+
+create table coches(
+
+
+
+	puertas integer,
+
+
+
+	software char varying(20)
+
+
+
+)inherits (vehiculos);
+
+
+
+
+
+
+
+-- \d+ coches para ver la descripcion de la creacion de la tabla
+
+
+
+-- si lo comprobamos veremos que no se añaden las restricciones
+
+
+
+
+
+
+
+alter table coches
+
+
+
+	add primary key (matricula)
+
+
+
+	include (matricula);
+
+
+
+
+
+
+
+create type tiemposMotos as enum('2T','4T');
+
+
+
+create table motos(
+
+
+
+	tiempos tiemposMotos,
+
+
+
+	maleta boolean
+
+
+
+)inherits (vehiculos);
+
+
+
+
+
+
+
+alter table motos
+
+
+
+	add primary key(matricula)
+
+
+
+	include(matricula);
+
+
+
+
+
+
+
+create table servicios(
+
+
+
+	idServicios serial primary key,
+
+
+
+	descripcion char varying(100),
+
+
+
+	costo double precision,
+
+
+
+	tiempo double precision
+
+
+
+);
+
+
+
+
+
+
+
+create table reparacion(
+
+
+
+	idServicio integer,
+
+
+
+	idMecanico integer,
+
+
+
+	matricula char varying(7),
+
+
+
+	fecha date,
+
+
+
+	estado char varying(50),
+
+
+
+	primary key (idMecanico, idServicio, matricula, fecha),
+
+
+
+	foreign key (idMecanico) references mecanico(idMecanico),
+
+
+
+	foreign key (idServicio) references servicios(idServicios),
+
+
+
+	foreign key (matricula) references vehiculos(matricula)
+
+
+
+);

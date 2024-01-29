@@ -1,0 +1,15 @@
+.root{
+    -fx-background-color: #1d1f2a; /* Fondo negro */
+}
+
+.label {
+    -fx-text-fill: white;
+
+     -fx-font-weight: bold;
+}
+.AnchorPane {
+    -fx-background-color: #1d1f2a; /* Negro más suave y azulado */
+}
+.table-view .column-header {
+    -fx-background-color: #3c3c53; /* Cambia esto según tu necesidad */
+}

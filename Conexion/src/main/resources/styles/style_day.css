@@ -1,0 +1,12 @@
+.root {
+    -fx-background-color: #ffffff; /* Fondo blanco */
+    -fx-text-fill: #000000;       /* Texto negro */
+}
+
+.modo-dia .anchor-pane {
+    -fx-background-color: #ffffff; /* Fondo blanco para AnchorPane en modo día */
+}
+
+.modo-dia .label {
+    -fx-text-fill: #000000;       /* Texto negro para Labels en modo día */
+}
