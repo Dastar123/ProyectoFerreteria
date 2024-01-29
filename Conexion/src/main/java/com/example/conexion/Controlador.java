@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.sql.*;
 
 
+/**
+ * Controlador es la clase que gestiona la lógica de la interfaz gráfica y la interacción con la base de datos
+ *
+ */
+
 public class Controlador {
 
     public AnchorPane fondo;
@@ -49,6 +54,10 @@ public class Controlador {
     Conexion conexion = new Conexion();
 
 
+    /**
+     * Inicializa el controlador, cargando datos desde la base de datos y configurando la interfaz gráfica.
+     * Además, se establece una relación bidireccional con el controlador de la segunda pantalla.(Aunque solo se usa de forma unidericcional)
+     */
 
     @FXML
     protected void initialize() {
@@ -63,6 +72,9 @@ public class Controlador {
 
     }
 
+    /**
+     * Carga datos desde la base de datos y los muestra en el TableView.
+     */
     public void cargarDatos() {
         idJava.setCellValueFactory(cellData -> cellData.getValue().idProperty());
         RolJava.setCellValueFactory(cellData -> cellData.getValue().rolProperty());
@@ -79,7 +91,10 @@ public class Controlador {
 
         try (Connection con = conexion.conectar()) {
             if (con != null) {
-                // Realizar la consulta
+                /**
+                 *  Realizar la consulta
+                  */
+
                 String sql = "SELECT " +
                         "mecanico.idmecanico, " +
                         "mecanico.rol, " +
@@ -99,10 +114,13 @@ public class Controlador {
                 try (PreparedStatement statement = con.prepareStatement(sql);
                      ResultSet resultSet = statement.executeQuery()) {
 
-                    // Crear una lista observable para almacenar los datos
+
                     ObservableList<Mecanico> listaMecanicos = FXCollections.observableArrayList();
 
-                    // Recorrer los resultados y agregarlos a la lista
+                    /**
+                     *   Recorre los resultados y agregarlos a la lista
+                      */
+
                     while (resultSet.next()) {
                         Mecanico mecanico = new Mecanico(
                                 resultSet.getString("idmecanico"),
@@ -122,22 +140,26 @@ public class Controlador {
                         listaMecanicos.add(mecanico);
                     }
 
-                    // Asignar la lista al TableView
+
                     EmpleadosContendor.setItems(listaMecanicos);
                 } catch (SQLException ex) {
-                    // Manejar la excepción de manera más específica o lanzarla
+
                     ex.printStackTrace();
                 } finally {
-                    // Cerrar la conexión en el bloque finally
+
                     conexion.desconectar();
                 }
             }
         } catch (SQLException ex) {
-            // Manejar la excepción de manera más específica o lanzarla
+
             ex.printStackTrace();
         }
     }
 
+    /**
+     * Cambia a la segunda pantalla cuando se activa el evento correspondiente.
+     *
+     */
     @FXML
     protected void CambiarPantalla() throws IOException {
         conexion.desconectar();
@@ -151,22 +173,31 @@ public class Controlador {
         stage.show();
     }
 
+    /**
+     * Actualiza la información de un mecánico en la base de datos y en el TableView.
+     * Muestra mensajes de advertencia si no se selecciona un mecánico o si no se actualiza ningún campo.
+     */
     @FXML
     protected void ActualizarMecanico() {
-        // Obtener el mecanico seleccionado en el TableView
         Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
 
+        /**
+         *  Muestra un mensaje de advertencia si no se ha seleccionado ningún mecanico
+         */
         if (mecanicoSeleccionado == null) {
-            // Mostrar mensaje de advertencia si no se ha seleccionado ningún mecanico
+
             mostrarMensaje("Advertencia", "No se ha seleccionado ningún mecanico", "Por favor, selecciona un mecanico antes de intentar actualizar.");
             return;
         }
 
-        // Construir la consulta de actualización base
+
+        /**
+         * Aquí construyo la consulta de actualización base
+         */
+
         StringBuilder sqlBuilder = new StringBuilder("UPDATE mecanico SET ");
         boolean algunValorActualizado = false;
 
-        // Actualizar el rol si hay un valor proporcionado
 
         if (!RolActualizar.getText().isEmpty()) {
             String nuevoRol = RolActualizar.getText().trim();
@@ -175,68 +206,63 @@ public class Controlador {
                 algunValorActualizado = true;
             } else {
                 mostrarMensaje("Error", "Rol inválido", "Los roles válidos son 'chapista', 'soldador' o 'pintor'.");
-                return; // Detener la actualización si el rol no es válido
+                return;
             }
         }
 
-        // Actualizar las horas si hay un valor proporcionado
         if (!HorarioActualizar.getText().isEmpty()) {
             sqlBuilder.append("conthoras = CAST(? AS integer), ");
             algunValorActualizado = true;
         }
 
-        // Actualizar el seguro si hay un valor proporcionado
+
         if (!SeguroActualizar.getText().isEmpty()) {
             sqlBuilder.append("seguro = ?, ");
             algunValorActualizado = true;
         }
 
-
-        // Actualizar el nombre si hay un valor proporcionado
         if (!NombreActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.persona.nombre = ?, ");
             algunValorActualizado = true;
         }
 
-        // Actualizar el número si hay un valor proporcionado
         if (!NumeroActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.persona.direccion.num = CAST(? AS integer ) , ");
             algunValorActualizado = true;
         }
-         // Actualizar la calle si hay un valor proporcionado
+
         if (!CalleActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.persona.direccion.calle = ?, ");
             algunValorActualizado = true;
         }
-        // Actualizar la ciudad si hay un valor proporcionado
+
         if (!CiudadActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.persona.direccion.ciudad = ?, ");
             algunValorActualizado = true;
         }
-        // Actualizar el Nuss si hay un valor proporcionado bigint
+
         if (!NussActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.nuss = CAST(? AS bigint ) , ");
 
 
             algunValorActualizado = true;
         }
-        // Actualizar la contraseña si hay un valor proporcionado
+
         if (!PassActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.pass = ?, ");
             algunValorActualizado = true;
         }
-        // Actualizar el código postal si hay un valor proporcionado
+
         if (!CpActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.persona.direccion.cp = ?, ");
             algunValorActualizado = true;
         }
-        // Actualizar la nómina si hay un valor proporcionado
+
         if (!NominaActualizar.getText().isEmpty()) {
             sqlBuilder.append("empleados.nomina = ?, ");
             algunValorActualizado = true;
         }
 
-        // Eliminar la última coma si algún valor fue actualizado
         if (!algunValorActualizado) {
             mostrarMensaje("Advertencia", "Ningún campo actualizado", "Por favor, escribe al menos en un campo antes de intentar actualizar.");
             return;
@@ -245,16 +271,16 @@ public class Controlador {
             sqlBuilder.deleteCharAt(sqlBuilder.length() - 2);
         }
 
-        // Agregar la condición WHERE
+
         sqlBuilder.append("WHERE idMecanico = ?");
 
-        // Actualizar los datos del mecanico con los valores proporcionados
+
         try (Connection con = conexion.conectar();
              PreparedStatement statement = con.prepareStatement(sqlBuilder.toString())) {
 
             int parametroIndex = 1;
 
-            // Setear los valores si fueron proporcionados
+
             if (!RolActualizar.getText().isEmpty()) {
                 statement.setString(parametroIndex++, RolActualizar.getText());
             }
@@ -292,16 +318,19 @@ public class Controlador {
                 statement.setString(parametroIndex++, NominaActualizar.getText());
             }
 
-            // Setear el último parámetro WHERE
+
             statement.setInt(parametroIndex, Integer.parseInt(mecanicoSeleccionado.getID()));
 
-            // Ejecutar la actualización
+            /**
+             *  Ejecuta la actualización
+             */
+
             statement.executeUpdate();
 
-            // Refrescar el TableView después de la actualización
+
             EmpleadosContendor.refresh();
 
-            // Mostrar mensaje de éxito
+
             cargarDatos();
             mostrarMensaje("Éxito", "Actualización exitosa", "Los datos del mecanico se actualizaron correctamente.");
 
@@ -311,10 +340,13 @@ public class Controlador {
     }
 
 
-
-
-
-    // Método auxiliar para mostrar mensajes
+    /**
+     * Muestra un mensaje de alerta con los parámetros proporcionados.
+     *
+     * @param titulo     El título del mensaje de alerta.
+     * @param encabezado El encabezado del mensaje de alerta.
+     * @param contenido  El contenido o cuerpo del mensaje de alerta.
+     */
     private void mostrarMensaje(String titulo, String encabezado, String contenido) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle(titulo);
@@ -322,28 +354,33 @@ public class Controlador {
         alert.setContentText(contenido);
         alert.showAndWait();
     }
-
+    /**
+     * Elimina un mecánico seleccionado de la base de datos y del TableView.
+     * Muestra mensajes de advertencia si no se selecciona un mecánico.
+     */
     @FXML
     protected void eliminarMecanico() {
-        // Obtener el mecanico seleccionado en el TableView
+
         Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
 
         if (mecanicoSeleccionado != null) {
-            // Mostrar un mensaje de confirmación
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmación");
             alert.setHeaderText("¿Estás seguro de que quieres eliminar a " + mecanicoSeleccionado.getNombre() + "?");
             alert.setContentText("Esta acción no se puede deshacer.");
 
-            // Obtener la respuesta del usuario
-            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
 
+            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+            /**
+             *Si el usuario confirma, eliminar el mecanico
+             */
             if (result == ButtonType.OK) {
-                // Si el usuario confirma, eliminar el mecanico
+
                 eliminarMecanicoDeBaseDeDatos(mecanicoSeleccionado);
             }
         } else {
-            // Si no se ha seleccionado ningún mecanico, mostrar un mensaje de advertencia
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Advertencia");
             alert.setHeaderText("No se ha seleccionado ningún mecanico");
@@ -352,13 +389,12 @@ public class Controlador {
             alert.showAndWait();
         }
     }
-
+    /**
+     * Elimina un registro de mecánico de la base de datos y actualiza la interfaz gráfica al removerlo del TableView.
+     *
+     * @param mecanico El objeto Mecanico que se eliminará de la base de datos y del TableView.
+     */
     private void eliminarMecanicoDeBaseDeDatos(Mecanico mecanico) {
-        // Aquí deberías implementar la lógica para eliminar el mecanico de tu base de datos
-        // Puedes usar mecanico.getId() para obtener el identificador del mecanico a eliminar
-        // Después de eliminarlo de la base de datos, también puedes eliminarlo de la lista del TableView
-
-        // Ejemplo ficticio:
         Conexion conexion = new Conexion();
         try (Connection con = conexion.conectar()) {
             if (con != null) {
@@ -377,14 +413,27 @@ public class Controlador {
         // Después de eliminar de la base de datos, también elimina de la lista del TableView
         EmpleadosContendor.getItems().remove(mecanico);
     }
+
+    /**
+     * Método auxiliar para cambiar entre el tema claro y oscuro.
+     *
+     */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
         Mecanico.crearImagenes(botonClaroOscuro,fondo);
     }
 
+    /**
+     * Método auxiliar que llama al método de actualización de mecánico.
 
+     */
     public void llamarActualizar(ActionEvent actionEvent) {
         ActualizarMecanico();
     }
+    /**
+     * Valida si un rol proporcionado es válido.
+     * @param rol Rol a validar.
+     * @return true si el rol es válido, false en caso contrario.
+     */
     private boolean validarRol(String rol) {
         return rol.equalsIgnoreCase("chapista") || rol.equalsIgnoreCase("soldador") || rol.equalsIgnoreCase("pintor");
     }
