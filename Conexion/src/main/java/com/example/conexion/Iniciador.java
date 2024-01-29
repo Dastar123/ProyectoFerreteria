@@ -7,10 +7,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase principal que inicia la aplicación JavaFX para el sistema MecanicoPanel.
+ */
 public class Iniciador extends Application {
 
+    /**
+     * Variable que indica si es de día o de noche.
+     * Si es verdadero, representa el modo día; si es falso, representa el modo noche.
+     */
     public static boolean nochedia=true;
 
+
+    /**
+     * Método principal que inicia la aplicación JavaFX.
+     *
+     * @param stage El objeto Stage principal de la aplicación.
+     */
     @Override
     public void start(Stage stage) throws IOException {
 

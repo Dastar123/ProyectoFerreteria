@@ -3,6 +3,9 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase que gestiona la conexión a la base de datos PostgreSQL.
+ */
 public class Conexion {
 
 
@@ -16,6 +19,11 @@ public class Conexion {
     public String password = "1234";
     public static Connection con;
 
+    /**
+     * Establece la conexión a la base de datos.
+     *
+     * @return La conexión establecida.
+     */
     public Connection conectar() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -28,24 +36,32 @@ public class Conexion {
         }
         return con;
     }
+
+    /**
+     * Realiza una prueba simple ejecutando una consulta en la base de datos.
+     */
     public void realizarPrueba() {
         try {
-            // Realiza una consulta simple
+
             String sql = "SELECT * FROM servicios";  // Reemplaza 'tu_tabla' con el nombre de tu tabla
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
-            // Muestra los resultados
+
             while (resultSet.next()) {
                 System.out.println("Columna1: " + resultSet.getString("columna1"));
                 System.out.println("Columna2: " + resultSet.getString("columna2"));
-                // Agrega más columnas según sea necesario
+
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /**
+     * Cierra la conexión a la base de datos.
+     */
     public void desconectar() {
         try {
             if (con != null && !con.isClosed()) {

@@ -11,6 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Clase que representa un objeto que simula a un Mecánico con sus respectivos campos.
+ */
 public class Mecanico {
     private StringProperty id;
     private StringProperty rol;
@@ -24,8 +27,26 @@ public class Mecanico {
     private StringProperty contrasena;
     private StringProperty nomina;
     private StringProperty fechaContratacion;
-    private StringProperty nuss; // Número de la Seguridad Social
+    private StringProperty nuss;
 
+
+    /**
+     * Constructor de la clase Mecanico.
+     *
+     * @param id                Identificador del mecánico.
+     * @param rol               Rol del mecánico.
+     * @param horas             Horas de trabajo del mecánico.
+     * @param seguro            Seguro del mecánico.
+     * @param nombre            Nombre del mecánico.
+     * @param numero            Número del mecánico.
+     * @param calle             Calle del mecánico.
+     * @param ciudad            Ciudad del mecánico.
+     * @param codigoPostal      Código postal del mecánico.
+     * @param contrasena        Contraseña del mecánico.
+     * @param nomina            Nómina del mecánico.
+     * @param fechaContratacion Fecha de contratación del mecánico.
+     * @param nuss              Número de seguro social del mecánico.
+     */
     public Mecanico(String id, String rol, String horas, String seguro, String nombre, String numero,
                     String calle, String ciudad, String codigoPostal, String contrasena, String nomina,
                     String fechaContratacion, String nuss) {
@@ -44,9 +65,10 @@ public class Mecanico {
         this.nuss = new SimpleStringProperty(nuss);
     }
 
-    // Resto de los métodos getter y property...
+    /**
+     *     Métodos getter y property para los nuevos campos
+      */
 
-    // Métodos getter y property para los nuevos campos
 
 
     public String getID() {
@@ -153,6 +175,12 @@ public class Mecanico {
         return seguro;
     }
 
+
+    /**
+     * Método estático que crea imágenes en función del modo claro u oscuro.
+     * @param button Botón al que se le asignará la imagen.
+     * @param fondo  Panel al que se le cambiará el estilo.
+     */
     public static void crearImagenes(Button button,  AnchorPane fondo) {
 
         if ( Iniciador.nochedia) {
@@ -171,6 +199,11 @@ public class Mecanico {
             cambiarClaroOscuro(fondo);
         }
     }
+    /**
+     * Método estático que cambia entre los modos claro y oscuro del estilo del fondo.
+     *
+     * @param fondo Panel al que se le cambiará el estilo.
+     */
     public static void cambiarClaroOscuro( AnchorPane fondo) {
         try {
             Scene scene = fondo.getScene();
