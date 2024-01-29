@@ -74,7 +74,7 @@ public class SegundaPantallaControlador {
     @FXML
     protected void insertarMecanico() {
         String rol = rolTextField.getText().trim();
-        if (!llamarAlertaSiInvalido(validarRol(rol), "Rol inválido. Los roles válidos son 'Chapista' o 'Mecánico' o 'Pintor'.")) {
+        if (!llamarAlertaSiInvalido(validarRol(rol), "Rol inválido. Los roles válidos son 'chapista' o 'mecánico' o 'pintor'.")) {
             return;
         }
         String contHorasText = conthorasTextField.getText().trim();

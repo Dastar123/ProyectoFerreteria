@@ -19,6 +19,17 @@ import java.sql.*;
 public class Controlador {
 
     public AnchorPane fondo;
+    public TextField RolActualizar;
+    public TextField HorarioActualizar;
+    public TextField SeguroActualizar;
+    public TextField NombreActualizar;
+    public TextField NumeroActualizar;
+    public TextField CalleActualizar;
+    public TextField CiudadActualizar;
+    public TextField NussActualizar;
+    public TextField PassActualizar;
+    public TextField CpActualizar;
+    public TextField NominaActualizar;
     private Controlador controlador = this;
     @FXML
     public TableColumn<Mecanico, String> idJava;
@@ -141,6 +152,187 @@ public class Controlador {
     }
 
     @FXML
+    protected void ActualizarMecanico() {
+        // Obtener el mecanico seleccionado en el TableView
+        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+
+        if (mecanicoSeleccionado == null) {
+            // Mostrar mensaje de advertencia si no se ha seleccionado ningún mecanico
+            mostrarMensaje("Advertencia", "No se ha seleccionado ningún mecanico", "Por favor, selecciona un mecanico antes de intentar actualizar.");
+            return;
+        }
+
+        // Construir la consulta de actualización base
+        StringBuilder sqlBuilder = new StringBuilder("UPDATE mecanico SET ");
+        boolean algunValorActualizado = false;
+
+        // Actualizar el rol si hay un valor proporcionado
+
+        if (!RolActualizar.getText().isEmpty()) {
+            String nuevoRol = RolActualizar.getText().trim();
+            if (validarRol(nuevoRol)) {
+                sqlBuilder.append("rol = CAST(? AS especialidad), ");
+                algunValorActualizado = true;
+            } else {
+                mostrarMensaje("Error", "Rol inválido", "Los roles válidos son 'chapista', 'soldador' o 'pintor'.");
+                return; // Detener la actualización si el rol no es válido
+            }
+        }
+
+        // Actualizar las horas si hay un valor proporcionado
+        if (!HorarioActualizar.getText().isEmpty()) {
+            sqlBuilder.append("conthoras = CAST(? AS integer), ");
+            algunValorActualizado = true;
+        }
+
+        // Actualizar el seguro si hay un valor proporcionado
+        if (!SeguroActualizar.getText().isEmpty()) {
+            sqlBuilder.append("seguro = ?, ");
+            algunValorActualizado = true;
+        }
+
+
+        // Actualizar el nombre si hay un valor proporcionado
+        if (!NombreActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.persona.nombre = ?, ");
+            algunValorActualizado = true;
+        }
+
+        // Actualizar el número si hay un valor proporcionado
+        if (!NumeroActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.persona.direccion.num = CAST(? AS integer ) , ");
+            algunValorActualizado = true;
+        }
+         // Actualizar la calle si hay un valor proporcionado
+        if (!CalleActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.persona.direccion.calle = ?, ");
+            algunValorActualizado = true;
+        }
+        // Actualizar la ciudad si hay un valor proporcionado
+        if (!CiudadActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.persona.direccion.ciudad = ?, ");
+            algunValorActualizado = true;
+        }
+        // Actualizar el Nuss si hay un valor proporcionado bigint
+        if (!NussActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.nuss = CAST(? AS bigint ) , ");
+
+
+            algunValorActualizado = true;
+        }
+        // Actualizar la contraseña si hay un valor proporcionado
+        if (!PassActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.pass = ?, ");
+            algunValorActualizado = true;
+        }
+        // Actualizar el código postal si hay un valor proporcionado
+        if (!CpActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.persona.direccion.cp = ?, ");
+            algunValorActualizado = true;
+        }
+        // Actualizar la nómina si hay un valor proporcionado
+        if (!NominaActualizar.getText().isEmpty()) {
+            sqlBuilder.append("empleados.nomina = ?, ");
+            algunValorActualizado = true;
+        }
+
+        // Eliminar la última coma si algún valor fue actualizado
+        if (!algunValorActualizado) {
+            mostrarMensaje("Advertencia", "Ningún campo actualizado", "Por favor, escribe al menos un campo antes de intentar actualizar.");
+            return;
+        }
+        if (algunValorActualizado) {
+            sqlBuilder.deleteCharAt(sqlBuilder.length() - 2);
+        }
+
+        // Agregar la condición WHERE
+        sqlBuilder.append("WHERE idMecanico = ?");
+
+        // Actualizar los datos del mecanico con los valores proporcionados
+        try (Connection con = conexion.conectar();
+             PreparedStatement statement = con.prepareStatement(sqlBuilder.toString())) {
+
+            int parametroIndex = 1;
+
+            // Setear los valores si fueron proporcionados
+            if (!RolActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, RolActualizar.getText());
+            }
+
+            if (!HorarioActualizar.getText().isEmpty()) {
+                statement.setInt(parametroIndex++, Integer.parseInt(HorarioActualizar.getText()));
+            }
+
+            if (!SeguroActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, SeguroActualizar.getText());
+            }
+
+            if (!NombreActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, NombreActualizar.getText());
+            }
+            if (!NumeroActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, NumeroActualizar.getText());
+            }
+            if (!CalleActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, CalleActualizar.getText());
+            }
+            if (!CiudadActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, CiudadActualizar.getText());
+            }
+            if (!NussActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, NussActualizar.getText());
+            }
+            if (!PassActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, PassActualizar.getText());
+            }
+            if (!CpActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, CpActualizar.getText());
+            }
+            if (!NominaActualizar.getText().isEmpty()) {
+                statement.setString(parametroIndex++, NominaActualizar.getText());
+            }
+
+            // Setear el último parámetro WHERE
+            statement.setInt(parametroIndex, Integer.parseInt(mecanicoSeleccionado.getID()));
+
+            // Ejecutar la actualización
+            statement.executeUpdate();
+
+            // Refrescar el TableView después de la actualización
+            EmpleadosContendor.refresh();
+
+            // Mostrar mensaje de éxito
+            cargarDatos();
+            mostrarMensaje("Éxito", "Actualización exitosa", "Los datos del mecanico se actualizaron correctamente.");
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+
+
+    // Método auxiliar para verificar si todos los campos están vacíos
+    private boolean camposVacios(String... campos) {
+        for (String campo : campos) {
+            if (!campo.isEmpty()) {
+                return false; // Al menos un campo no está vacío
+            }
+        }
+        return true; // Todos los campos están vacíos
+    }
+
+    // Método auxiliar para mostrar mensajes
+    private void mostrarMensaje(String titulo, String encabezado, String contenido) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(encabezado);
+        alert.setContentText(contenido);
+        alert.showAndWait();
+    }
+
+    @FXML
     protected void eliminarMecanico() {
         // Obtener el mecanico seleccionado en el TableView
         Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
@@ -199,5 +391,11 @@ public class Controlador {
     }
 
 
+    public void llamarActualizar(ActionEvent actionEvent) {
+        ActualizarMecanico();
+    }
+    private boolean validarRol(String rol) {
+        return rol.equalsIgnoreCase("chapista") || rol.equalsIgnoreCase("soldador") || rol.equalsIgnoreCase("pintor");
+    }
 
 }

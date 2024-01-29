@@ -29,7 +29,7 @@
       <Label layoutX="415.0" layoutY="326.0" text="Seguro" />
       <TextField fx:id="RolActualizar" layoutX="391.0" layoutY="301.0" prefHeight="25.0" prefWidth="87.0" />
       <Button layoutX="564.0" layoutY="586.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" />
-      <Button layoutX="458.0" layoutY="586.0" mnemonicParsing="false" onAction="#cargarDatos" text="Actualizar" />
+      <Button layoutX="458.0" layoutY="586.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" />
       <Button layoutX="373.0" layoutY="586.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" />
       <Button fx:id="CambiarPantalla" layoutX="435.0" layoutY="618.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Segunda pantalla" />
       <Label layoutX="515.0" layoutY="281.0" text="Horario" />
@@ -48,9 +48,9 @@
       <TextField fx:id="CalleActualizar" layoutX="498.0" layoutY="391.0" prefHeight="25.0" prefWidth="87.0" />
       <TextField fx:id="CiudadActualizar" layoutX="390.0" layoutY="436.0" prefHeight="25.0" prefWidth="87.0" />
       <TextField fx:id="NussActualizar" layoutX="498.0" layoutY="436.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="passActualizar" layoutX="390.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="cpActualizar" layoutX="498.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="nominaActualizar" layoutX="448.0" layoutY="543.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="PassActualizar" layoutX="390.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="CpActualizar" layoutX="498.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="NominaActualizar" layoutX="448.0" layoutY="543.0" prefHeight="25.0" prefWidth="87.0" />
       <Button fx:id="botonClaroOscuro" layoutX="957.0" layoutY="14.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
    </children>
 </AnchorPane>
