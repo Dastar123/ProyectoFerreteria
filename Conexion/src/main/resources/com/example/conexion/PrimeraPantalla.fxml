@@ -6,8 +6,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="fondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.Controlador">
+<AnchorPane fx:id="fondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="682.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.Controlador">
    <children>
       <TableView fx:id="EmpleadosContendor" layoutX="18.0" layoutY="56.0" prefHeight="215.0" prefWidth="990.0">
         <columns>
@@ -25,32 +26,37 @@
             <TableColumn fx:id="nussJava" prefWidth="130.0" text="Nuss" />
         </columns>
       </TableView>
-      <Label layoutX="425.0" layoutY="280.0" styleClass="D:\Dad\Conexion\src\main\resources\Styles\style_day.css" text="Rol" />
-      <Label layoutX="415.0" layoutY="326.0" text="Seguro" />
-      <TextField fx:id="RolActualizar" layoutX="391.0" layoutY="301.0" prefHeight="25.0" prefWidth="87.0" />
-      <Button layoutX="564.0" layoutY="586.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" />
-      <Button layoutX="458.0" layoutY="586.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" />
-      <Button layoutX="373.0" layoutY="586.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" />
-      <Button fx:id="CambiarPantalla" layoutX="435.0" layoutY="618.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Segunda pantalla" />
-      <Label layoutX="515.0" layoutY="281.0" text="Horario" />
-      <Label layoutX="520.0" layoutY="326.0" text="Nombre" />
-      <Label layoutX="412.0" layoutY="372.0" text="Teléfono" />
-      <Label layoutX="529.0" layoutY="372.0" text="Calle" />
-      <Label layoutX="415.0" layoutY="416.0" text="Ciudad" />
-      <Label layoutX="401.0" layoutY="469.0" text="Contraseña" />
-      <Label layoutX="507.0" layoutY="469.0" text="CodigoPostal" />
-      <Label layoutX="470.0" layoutY="520.0" text="Nomina" />
-      <Label layoutX="529.0" layoutY="416.0" text="Nuss" />
-      <TextField fx:id="HorarioActualizar" layoutX="498.0" layoutY="301.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="SeguroActualizar" layoutX="390.0" layoutY="347.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="NombreActualizar" layoutX="498.0" layoutY="347.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="NumeroActualizar" layoutX="390.0" layoutY="391.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="CalleActualizar" layoutX="498.0" layoutY="391.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="CiudadActualizar" layoutX="390.0" layoutY="436.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="NussActualizar" layoutX="498.0" layoutY="436.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="PassActualizar" layoutX="390.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="CpActualizar" layoutX="498.0" layoutY="491.0" prefHeight="25.0" prefWidth="87.0" />
-      <TextField fx:id="NominaActualizar" layoutX="448.0" layoutY="543.0" prefHeight="25.0" prefWidth="87.0" />
+      <Label layoutX="440.0" layoutY="305.0" styleClass="D:\Dad\Conexion\src\main\resources\Styles\style_day.css" text="Rol" />
+      <Label layoutX="430.0" layoutY="351.0" text="Seguro" />
+      <TextField fx:id="RolActualizar" layoutX="406.0" layoutY="326.0" prefHeight="25.0" prefWidth="87.0" />
+      <Button layoutX="579.0" layoutY="611.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" />
+      <Button layoutX="473.0" layoutY="611.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" />
+      <Button layoutX="388.0" layoutY="611.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" />
+      <Button fx:id="CambiarPantalla" layoutX="450.0" layoutY="643.0" mnemonicParsing="false" text="Segunda pantalla" />
+      <Label layoutX="530.0" layoutY="306.0" text="Horario" />
+      <Label layoutX="535.0" layoutY="351.0" text="Nombre" />
+      <Label layoutX="427.0" layoutY="397.0" text="Teléfono" />
+      <Label layoutX="544.0" layoutY="397.0" text="Calle" />
+      <Label layoutX="430.0" layoutY="441.0" text="Ciudad" />
+      <Label layoutX="416.0" layoutY="494.0" text="Contraseña" />
+      <Label layoutX="522.0" layoutY="494.0" text="CodigoPostal" />
+      <Label layoutX="485.0" layoutY="545.0" text="Nomina" />
+      <Label layoutX="544.0" layoutY="441.0" text="Nuss" />
+      <TextField fx:id="HorarioActualizar" layoutX="513.0" layoutY="326.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="SeguroActualizar" layoutX="405.0" layoutY="372.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="NombreActualizar" layoutX="513.0" layoutY="372.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="NumeroActualizar" layoutX="405.0" layoutY="416.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="CalleActualizar" layoutX="513.0" layoutY="416.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="CiudadActualizar" layoutX="405.0" layoutY="461.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="NussActualizar" layoutX="513.0" layoutY="461.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="PassActualizar" layoutX="405.0" layoutY="516.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="CpActualizar" layoutX="513.0" layoutY="516.0" prefHeight="25.0" prefWidth="87.0" />
+      <TextField fx:id="NominaActualizar" layoutX="463.0" layoutY="568.0" prefHeight="25.0" prefWidth="87.0" />
       <Button fx:id="botonClaroOscuro" layoutX="957.0" layoutY="14.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Label alignment="CENTER" layoutX="361.0" layoutY="271.0" prefHeight="17.0" prefWidth="305.0" text="DATOS PARA ACTUALIZAR" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
