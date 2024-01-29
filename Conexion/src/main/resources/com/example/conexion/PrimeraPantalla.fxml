@@ -32,7 +32,7 @@
       <Button layoutX="579.0" layoutY="611.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" />
       <Button layoutX="473.0" layoutY="611.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" />
       <Button layoutX="388.0" layoutY="611.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" />
-      <Button fx:id="CambiarPantalla" layoutX="450.0" layoutY="643.0" mnemonicParsing="false" text="Segunda pantalla" />
+      <Button fx:id="CambiarPantalla" layoutX="459.0" layoutY="643.0" mnemonicParsing="false" text="Segunda pantalla" />
       <Label layoutX="530.0" layoutY="306.0" text="Horario" />
       <Label layoutX="535.0" layoutY="351.0" text="Nombre" />
       <Label layoutX="427.0" layoutY="397.0" text="Teléfono" />
