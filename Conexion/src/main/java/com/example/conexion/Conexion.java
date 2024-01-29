@@ -43,7 +43,7 @@ public class Conexion {
     public void realizarPrueba() {
         try {
 
-            String sql = "SELECT * FROM servicios";  // Reemplaza 'tu_tabla' con el nombre de tu tabla
+            String sql = "SELECT * FROM servicios";
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
 
