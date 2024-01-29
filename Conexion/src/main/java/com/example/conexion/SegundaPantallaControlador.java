@@ -18,6 +18,9 @@ import java.time.format.DateTimeParseException;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * Controlador para la segunda pantalla de la aplicación, encargado de la inserción de nuevos mecánicos.
+ */
 public class SegundaPantallaControlador {
     @FXML
     public Button UpdateButton;
@@ -71,6 +74,9 @@ public class SegundaPantallaControlador {
 
     }
 
+    /**
+     * Método para  insertar un nuevo mecánico.
+     */
     @FXML
     protected void insertarMecanico() {
         String rol = rolTextField.getText().trim();
@@ -128,7 +134,10 @@ public class SegundaPantallaControlador {
                         "VALUES (?::especialidad,?,?, ROW(Row( ?, ROW(?, ?, ?, ?)),?,?,?::date,?)::empleados_type);";
 
                 try (PreparedStatement statement = con.prepareStatement(sql)) {
-                    // Asignar valores a los parámetros
+                    /**
+                     *  Asigna valores a los parámetros
+                      */
+
                     statement.setObject(1, rol, Types.VARCHAR);
                     statement.setInt(2, parseInt(conthorasTextField.getText()));
                     statement.setString(3, seguro);
@@ -142,7 +151,7 @@ public class SegundaPantallaControlador {
                     statement.setObject(11, LocalDate.parse(fecha));
                     statement.setLong(12, Long.parseLong(nussText));
 
-                    // Ejecutar la consulta
+
                     int filasAfectadas = statement.executeUpdate();
 
                     if (filasAfectadas > 0) {
@@ -165,9 +174,22 @@ public class SegundaPantallaControlador {
         }
     }
 
+
+    /**
+     * Valida si el rol ingresado es válido.
+     * @param rol El rol a validar.
+     * @return true si el rol es válido, false de lo contrario.
+     */
     private boolean validarRol(String rol) {
         return rol.equalsIgnoreCase("chapista") || rol.equalsIgnoreCase("soldador") || rol.equalsIgnoreCase("pintor");
     }
+
+    /**
+     * Valida si la fecha ingresada es válida.
+     *
+     * @param fecha La fecha a validar.
+     * @return true si la fecha es válida, false de lo contrario.
+     */
 
     private boolean validarFecha(String fecha) {
         try {
@@ -178,6 +200,12 @@ public class SegundaPantallaControlador {
         }
     }
 
+    /**
+     * Muestra una alerta con el título y mensaje proporcionados.
+     *
+     * @param titulo  El título de la alerta.
+     * @param mensaje El mensaje de la alerta.
+     */
     private void mostrarAlerta(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(titulo);
@@ -186,7 +214,13 @@ public class SegundaPantallaControlador {
         alert.showAndWait();
     }
 
-
+    /**
+     * Llama a una alerta si la condición es falsa y devuelve el resultado de la condición.
+     *
+     * @param condicion La condición a evaluar.
+     * @param mensaje   El mensaje a mostrar en la alerta si la condición es falsa.
+     * @return true si la condición es verdadera, false de lo contrario.
+     */
     private boolean llamarAlertaSiInvalido(boolean condicion, String mensaje) {
         if (!condicion) {
             mostrarAlerta("Error", mensaje);
@@ -194,13 +228,22 @@ public class SegundaPantallaControlador {
         }
         return true;
     }
+
+    /**
+     * Cierra la ventana actual.
+     */
     private void cerrarVentana() {
-        // Obtenemos la Stage (ventana) asociada al TextField
+
         Stage stage = (Stage) nominaTextField.getScene().getWindow();
 
-        // Cerramos la Stage (ventana)
+
         stage.close();
     }
+    /**
+     * Cambia el tema claro/oscuro de la aplicación.
+     *
+     * @param actionEvent Evento que desencadena el cambio de tema.
+     */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
         Mecanico.crearImagenes(botonClaroOscuro,fondo);
     }
