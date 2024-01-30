@@ -77,6 +77,7 @@ public class Controlador {
 
         Platform.runLater(() -> {
             actualizarEstiloNocturno();
+            actualizarEstiloNocturno();
         });
     }
 
@@ -460,17 +461,21 @@ public class Controlador {
      * @param mecanico El mecánico seleccionado.
      */
     private void cargarDatosDeMecanicoSeleccionado(Mecanico mecanico) {
-        RolActualizar.setText(mecanico.getRol());
-        HorarioActualizar.setText(String.valueOf(mecanico.getHoras()));
-        SeguroActualizar.setText(mecanico.getSeguro());
-        NombreActualizar.setText(mecanico.getNombre());
-        NumeroActualizar.setText(String.valueOf(mecanico.getNumero()));
-        CalleActualizar.setText(mecanico.getCalle());
-        CiudadActualizar.setText(mecanico.getCiudad());
-        NussActualizar.setText(String.valueOf(mecanico.getNuss()));
-        PassActualizar.setText(mecanico.getContrasena());
-        CpActualizar.setText(mecanico.getCodigoPostal());
-        NominaActualizar.setText(mecanico.getNomina());
+        if(mecanico!=null){
+            RolActualizar.setText(mecanico.getRol());
+            HorarioActualizar.setText(String.valueOf(mecanico.getHoras()));
+            SeguroActualizar.setText(mecanico.getSeguro());
+            NombreActualizar.setText(mecanico.getNombre());
+            NumeroActualizar.setText(String.valueOf(mecanico.getNumero()));
+            CalleActualizar.setText(mecanico.getCalle());
+            CiudadActualizar.setText(mecanico.getCiudad());
+            NussActualizar.setText(String.valueOf(mecanico.getNuss()));
+            PassActualizar.setText(mecanico.getContrasena());
+            CpActualizar.setText(mecanico.getCodigoPostal());
+            NominaActualizar.setText(mecanico.getNomina());
+        }
+
+
     }
 
     @FXML

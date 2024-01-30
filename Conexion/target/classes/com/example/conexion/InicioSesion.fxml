@@ -25,10 +25,10 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField layoutX="226.0" layoutY="117.0" />
-      <TextField layoutX="226.0" layoutY="205.0" />
+      <TextField fx:id="NombreField" layoutX="226.0" layoutY="117.0" />
+      <TextField fx:id="contraField" layoutX="226.0" layoutY="205.0" />
       <Label layoutX="258.0" layoutY="293.0" text="¿No tienes una?" />
       <Button layoutX="258.0" layoutY="310.0" mnemonicParsing="false" onAction="#CambiarPantalla" style="-fx-background-color: transparent; -fx-underline-color: blue;" text="Crear cuenta" textAlignment="CENTER" textFill="#3e5bd0" underline="true" wrapText="true" />
-      <Button layoutX="277.0" layoutY="249.0" mnemonicParsing="false" text="Entrar" />
+      <Button fx:id="EntrarButton" layoutX="277.0" layoutY="249.0" mnemonicParsing="false" onAction="#Comprobador" text="Entrar" />
    </children>
 </AnchorPane>
