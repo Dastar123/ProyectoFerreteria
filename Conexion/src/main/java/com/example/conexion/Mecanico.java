@@ -226,7 +226,7 @@ public class Mecanico {
 
                 }
             } else {
-                System.out.println("La escena es nula. Asegúrate de que la escena esté asignada antes de intentar acceder a ella.");
+
             }
         } catch (Exception e) {
             throw new RuntimeException(e);

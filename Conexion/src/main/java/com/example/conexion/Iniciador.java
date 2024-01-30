@@ -32,7 +32,7 @@ public class Iniciador extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Iniciador.class.getResource("PrimeraPantalla.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("MecanicoPanel");
+        stage.setTitle("Mecánico Panel");
         stage.setScene(scene);
         stage.show();
     }
