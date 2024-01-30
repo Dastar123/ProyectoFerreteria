@@ -30,9 +30,9 @@ public class Iniciador extends Application {
     public void start(Stage stage) throws IOException {
 
 
-        FXMLLoader fxmlLoader = new FXMLLoader(Iniciador.class.getResource("PrimeraPantalla.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Iniciador.class.getResource("InicioSesion.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Mecánico Panel");
+        stage.setTitle("Inicio de sesión");
         stage.setScene(scene);
         stage.show();
     }

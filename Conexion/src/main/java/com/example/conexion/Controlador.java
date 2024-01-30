@@ -452,7 +452,7 @@ public class Controlador {
 
     private void actualizarEstiloNocturno() {
         Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
-        // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
+
     }
     /**
      * Carga los datos del mecánico seleccionado en los campos de actualización.

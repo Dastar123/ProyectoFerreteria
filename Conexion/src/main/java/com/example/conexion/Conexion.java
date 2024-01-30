@@ -10,9 +10,9 @@ public class Conexion {
 
 
     //Depende del host
-    public String url = "jdbc:postgresql://localhost:5432/CytnhiaFerreteria";
+    // public String url = "jdbc:postgresql://localhost:5432/CytnhiaFerreteria";
 
-    // public String url = "jdbc:postgresql://localhost:5433/CytnhiaFerreteria";
+    public String url = "jdbc:postgresql://localhost:5433/CytnhiaFerreteria";
 
 
     public String usuario = "postgres";

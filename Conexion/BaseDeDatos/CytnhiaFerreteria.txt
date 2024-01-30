@@ -510,3 +510,23 @@ create table reparacion(
 
 
 );
+
+CREATE TABLE controlador (
+    idControlador serial PRIMARY KEY,
+    nombreUsuario VARCHAR(255) UNIQUE NOT NULL,
+    contraseña VARCHAR(255) NOT NULL
+);
+
+CREATE OR REPLACE FUNCTION buscar_controlador(p_nombre_usuario VARCHAR(255))
+RETURNS TABLE (
+    idControlador INT,
+    nombreUsuario VARCHAR(255),
+    contraseña VARCHAR(255)
+)
+AS $$
+BEGIN
+    RETURN QUERY SELECT controlador.idControlador, controlador.nombreUsuario, controlador.contraseña
+                 FROM controlador
+                 WHERE controlador.nombreUsuario = p_nombre_usuario;
+END;
+$$ LANGUAGE plpgsql;
