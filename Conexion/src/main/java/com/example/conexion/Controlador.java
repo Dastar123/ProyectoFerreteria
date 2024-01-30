@@ -454,5 +454,28 @@ public class Controlador {
         Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
         // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
     }
+    /**
+     * Carga los datos del mecánico seleccionado en los campos de actualización.
+     *
+     * @param mecanico El mecánico seleccionado.
+     */
+    private void cargarDatosDeMecanicoSeleccionado(Mecanico mecanico) {
+        RolActualizar.setText(mecanico.getRol());
+        HorarioActualizar.setText(String.valueOf(mecanico.getHoras()));
+        SeguroActualizar.setText(mecanico.getSeguro());
+        NombreActualizar.setText(mecanico.getNombre());
+        NumeroActualizar.setText(String.valueOf(mecanico.getNumero()));
+        CalleActualizar.setText(mecanico.getCalle());
+        CiudadActualizar.setText(mecanico.getCiudad());
+        NussActualizar.setText(String.valueOf(mecanico.getNuss()));
+        PassActualizar.setText(mecanico.getContrasena());
+        CpActualizar.setText(mecanico.getCodigoPostal());
+        NominaActualizar.setText(mecanico.getNomina());
+    }
 
+    @FXML
+    private void llamarDatosMecanico(){
+        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+        cargarDatosDeMecanicoSeleccionado(mecanicoSeleccionado);
+    }
 }
