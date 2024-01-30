@@ -181,7 +181,7 @@ public class Mecanico {
      * @param button Botón al que se le asignará la imagen.
      * @param fondo  Panel al que se le cambiará el estilo.
      */
-    public static void crearImagenes(Button button,  AnchorPane fondo) {
+    public static void crearImagenes(Button button,  AnchorPane fondo,boolean nochedia) {
 
         if ( Iniciador.nochedia) {
             Image lunaImage = new Image(Controlador.class.getResourceAsStream("/imgs/luna.png"));
@@ -189,14 +189,14 @@ public class Mecanico {
             lunaImageView.setFitWidth(30);
             lunaImageView.setFitHeight(30);
             button.setGraphic(lunaImageView);
-            cambiarClaroOscuro(fondo);
+            cambiarClaroOscuro(fondo,nochedia);
         } else {
             Image solImage = new Image(Controlador.class.getResourceAsStream("/imgs/sol.png"));
             ImageView solImageView = new ImageView(solImage);
             solImageView.setFitWidth(30);
             solImageView.setFitHeight(30);
             button.setGraphic(solImageView);
-            cambiarClaroOscuro(fondo);
+            cambiarClaroOscuro(fondo,nochedia);
         }
     }
     /**
@@ -204,7 +204,7 @@ public class Mecanico {
      *
      * @param fondo Panel al que se le cambiará el estilo.
      */
-    public static void cambiarClaroOscuro( AnchorPane fondo) {
+    public static void cambiarClaroOscuro( AnchorPane fondo,boolean nocheDia) {
         try {
             Scene scene = fondo.getScene();
 
@@ -212,26 +212,35 @@ public class Mecanico {
                 String cssOscuro = SegundaPantallaControlador.class.getResource("/styles/style_night.css").toExternalForm();
                 String cssClaro = SegundaPantallaControlador.class.getResource("/styles/style_day.css").toExternalForm();
 
-                if (Iniciador.nochedia) {
+                if (nocheDia) {
                     scene.getStylesheets().clear();
                     scene.getStylesheets().add(cssClaro);
-                    Iniciador.nochedia = false;
+                    Iniciador.setNochedia(false);
+
 
                 } else {
                     scene.getStylesheets().clear();
                     scene.getStylesheets().add(cssOscuro);
 
-                    Iniciador.nochedia = true;
+                    Iniciador.setNochedia(true);
 
                 }
             } else {
-                System.out.println("La escena es nula. Asegúrate de que la escena esté asignada antes de intentar acceder a ella.");
+
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
+    public static void delay(int milisegundos) {
+        try {
+            // Dormir el hilo actual durante el tiempo especificado
+            Thread.sleep(milisegundos);
+        } catch (InterruptedException e) {
+            // Manejar la excepción si se interrumpe el hilo durante el sueño
+            e.printStackTrace();
+        }
+    }
 
 
 }

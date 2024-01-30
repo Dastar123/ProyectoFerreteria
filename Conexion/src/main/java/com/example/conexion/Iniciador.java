@@ -16,7 +16,9 @@ public class Iniciador extends Application {
      * Variable que indica si es de día o de noche.
      * Si es verdadero, representa el modo día; si es falso, representa el modo noche.
      */
-    public static boolean nochedia=true;
+    public static boolean nochedia=false;
+
+
 
 
     /**
@@ -30,13 +32,22 @@ public class Iniciador extends Application {
 
         FXMLLoader fxmlLoader = new FXMLLoader(Iniciador.class.getResource("PrimeraPantalla.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("MecanicoPanel");
+        stage.setTitle("Mecánico Panel");
         stage.setScene(scene);
         stage.show();
+    }
+    public static boolean isModoNocturno() {
+        return nochedia;
+    }
+
+    public static void setNochedia(boolean nochedia) {
+        Iniciador.nochedia = nochedia;
     }
 
     public static void main(String[] args) {
 
         launch();
     }
+
+
 }

@@ -1,6 +1,8 @@
 package com.example.conexion;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,8 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
+
+
 
 
 /**
@@ -50,27 +54,32 @@ public class Controlador {
     public TableColumn<Mecanico, String> CpJava;
     public TableColumn<Mecanico, String> nussJava;
     public TableColumn<Mecanico, String> NominaJava;
+
     public Button botonClaroOscuro;
     Conexion conexion = new Conexion();
-
+    public static boolean noche;
 
     /**
      * Inicializa el controlador, cargando datos desde la base de datos y configurando la interfaz gráfica.
      * Además, se establece una relación bidireccional con el controlador de la segunda pantalla.(Aunque solo se usa de forma unidericcional)
      */
+    public static boolean cambiarEstadoNocheDia(boolean cambio ) {
+        noche=cambio;
+        return noche;
+    }
 
     @FXML
     protected void initialize() {
         // Cargar datos desde la base de datos
         cargarDatos();
-        SegundaPantallaControlador.controladorPantalla2=controlador;
+        SegundaPantallaControlador.controladorPantalla2 = controlador;
+        cambiarEstadoNocheDia(Iniciador.nochedia);
 
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
-
-
-
-
+        Platform.runLater(() -> {
+            actualizarEstiloNocturno();
+        });
     }
+
 
     /**
      * Carga datos desde la base de datos y los muestra en el TableView.
@@ -138,6 +147,8 @@ public class Controlador {
                                 resultSet.getString("nuss")
                         );
                         listaMecanicos.add(mecanico);
+                        actualizarEstiloNocturno();
+                        actualizarEstiloNocturno();
                     }
 
 
@@ -419,7 +430,7 @@ public class Controlador {
      *
      */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
+        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
 
     /**
@@ -438,4 +449,33 @@ public class Controlador {
         return rol.equalsIgnoreCase("chapista") || rol.equalsIgnoreCase("soldador") || rol.equalsIgnoreCase("pintor");
     }
 
+
+    private void actualizarEstiloNocturno() {
+        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
+    }
+    /**
+     * Carga los datos del mecánico seleccionado en los campos de actualización.
+     *
+     * @param mecanico El mecánico seleccionado.
+     */
+    private void cargarDatosDeMecanicoSeleccionado(Mecanico mecanico) {
+        RolActualizar.setText(mecanico.getRol());
+        HorarioActualizar.setText(String.valueOf(mecanico.getHoras()));
+        SeguroActualizar.setText(mecanico.getSeguro());
+        NombreActualizar.setText(mecanico.getNombre());
+        NumeroActualizar.setText(String.valueOf(mecanico.getNumero()));
+        CalleActualizar.setText(mecanico.getCalle());
+        CiudadActualizar.setText(mecanico.getCiudad());
+        NussActualizar.setText(String.valueOf(mecanico.getNuss()));
+        PassActualizar.setText(mecanico.getContrasena());
+        CpActualizar.setText(mecanico.getCodigoPostal());
+        NominaActualizar.setText(mecanico.getNomina());
+    }
+
+    @FXML
+    private void llamarDatosMecanico(){
+        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+        cargarDatosDeMecanicoSeleccionado(mecanicoSeleccionado);
+    }
 }

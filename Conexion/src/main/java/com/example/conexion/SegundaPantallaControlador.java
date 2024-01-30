@@ -1,6 +1,8 @@
 package com.example.conexion;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -8,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -65,12 +68,29 @@ public class SegundaPantallaControlador {
 
     public static Controlador controladorPantalla2;
     Conexion conexion = new Conexion();
-
-
+    public static boolean noche;
+    public static boolean cambiarEstadoNocheDia(boolean cambio ) {
+        noche=cambio;
+        return noche;
+    }
     @FXML
     protected void initialize() {
 
-        Mecanico.crearImagenes(botonClaroOscuro, fondo);
+
+        Platform.runLater(() -> {
+            actualizarEstiloNocturno();
+            actualizarEstiloNocturno();
+            Stage stage = (Stage) botonClaroOscuro.getScene().getWindow();
+            stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+                @Override
+                public void handle(WindowEvent event) {
+                    // Llamar al método que quieres ejecutar antes de cerrar la ventana
+                    antesDeCerrarVentana();
+                }
+            });
+
+        });
+
 
     }
 
@@ -245,8 +265,15 @@ public class SegundaPantallaControlador {
      * @param actionEvent Evento que desencadena el cambio de tema.
      */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
+        actualizarEstiloNocturno();
     }
+    private void actualizarEstiloNocturno() {
+        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
+    }
+    private void antesDeCerrarVentana() {
+        controladorPantalla2.cargarDatos();
+        conexion.desconectar();
 
-
+    }
 }
