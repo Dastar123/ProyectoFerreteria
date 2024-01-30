@@ -1,5 +1,6 @@
 package com.example.conexion;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -53,6 +54,7 @@ public class Controlador {
     public TableColumn<Mecanico, String> CpJava;
     public TableColumn<Mecanico, String> nussJava;
     public TableColumn<Mecanico, String> NominaJava;
+
     public Button botonClaroOscuro;
     Conexion conexion = new Conexion();
     public static boolean noche;
@@ -71,10 +73,13 @@ public class Controlador {
         // Cargar datos desde la base de datos
         cargarDatos();
         SegundaPantallaControlador.controladorPantalla2 = controlador;
+        cambiarEstadoNocheDia(Iniciador.nochedia);
 
-        Mecanico.delay(3000);
-        actualizarEstiloNocturno();
+        Platform.runLater(() -> {
+            actualizarEstiloNocturno();
+        });
     }
+
 
     /**
      * Carga datos desde la base de datos y los muestra en el TableView.
@@ -142,6 +147,8 @@ public class Controlador {
                                 resultSet.getString("nuss")
                         );
                         listaMecanicos.add(mecanico);
+                        actualizarEstiloNocturno();
+                        actualizarEstiloNocturno();
                     }
 
 
