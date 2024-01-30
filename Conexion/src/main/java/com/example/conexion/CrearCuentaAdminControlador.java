@@ -69,11 +69,7 @@ public class CrearCuentaAdminControlador {
 
         stage.close();
     }
-    public  void setControlador2() {
-        this.actualizarEstiloNocturno();
 
-
-    }
 
     @FXML
     protected void crear(ActionEvent actionEvent) throws IOException {
@@ -150,4 +146,14 @@ public class CrearCuentaAdminControlador {
         alert.showAndWait();
     }
 
+    public void Volver(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Iniciador.class.getResource("InicioSesion.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Inicio de sesión");
+
+        stage.setScene(new Scene(root));
+        stage.show();
+        cerrarVentana();
+    }
 }

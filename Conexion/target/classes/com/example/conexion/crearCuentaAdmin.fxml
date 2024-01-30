@@ -28,5 +28,6 @@
       <TextField fx:id="CrearPass" layoutX="236.0" layoutY="215.0" />
       <Button layoutX="287.0" layoutY="259.0" mnemonicParsing="false" onAction="#crear" text="Crear" />
       <Button fx:id="botonClaroOscuro" layoutX="510.0" layoutY="31.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button layoutX="285.0" layoutY="295.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
    </children>
 </AnchorPane>
