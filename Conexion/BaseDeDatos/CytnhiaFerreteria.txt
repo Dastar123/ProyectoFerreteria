@@ -530,3 +530,14 @@ BEGIN
                  WHERE controlador.nombreUsuario = p_nombre_usuario;
 END;
 $$ LANGUAGE plpgsql;
+
+
+/**
+*Hacer un tigre para la matricula (?
+*Hacer un tigre para insertar el vehiculo en la tabla relacional entre cleintes y vehiculos
+* Cambiar el nuss a int
+*Hacer un mensaje si la fecha no esta introducida correctamente
+*Poner que el date se europan para que sea nuestro calendario
+*Y otra función para relacionar la tabla de reparaciones y servicios por el id mecanico
+*Crear un objeto para las sentencias de las Base de datos
+*/

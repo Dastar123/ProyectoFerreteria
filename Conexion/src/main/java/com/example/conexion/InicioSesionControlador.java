@@ -66,6 +66,7 @@ public class InicioSesionControlador {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PrimeraPantalla.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
+
         stage.setTitle("Panel mecanicos");
         cerrarVentana();
 
