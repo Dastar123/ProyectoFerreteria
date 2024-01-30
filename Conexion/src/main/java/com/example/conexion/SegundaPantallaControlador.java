@@ -65,13 +65,16 @@ public class SegundaPantallaControlador {
 
     public static Controlador controladorPantalla2;
     Conexion conexion = new Conexion();
-
-
+    public static boolean noche;
+    public static boolean cambiarEstadoNocheDia(boolean cambio ) {
+        noche=cambio;
+        return noche;
+    }
     @FXML
     protected void initialize() {
 
-        Mecanico.crearImagenes(botonClaroOscuro, fondo);
-
+        cambiarEstadoNocheDia(Iniciador.isModoNocturno());
+        actualizarEstiloNocturno();
     }
 
     /**
@@ -245,8 +248,11 @@ public class SegundaPantallaControlador {
      * @param actionEvent Evento que desencadena el cambio de tema.
      */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
+        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
-
+    private void actualizarEstiloNocturno() {
+        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.example.conexion;
 
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.*;
+
+
 
 
 /**
@@ -52,24 +55,25 @@ public class Controlador {
     public TableColumn<Mecanico, String> NominaJava;
     public Button botonClaroOscuro;
     Conexion conexion = new Conexion();
-
+    public static boolean noche;
 
     /**
      * Inicializa el controlador, cargando datos desde la base de datos y configurando la interfaz gráfica.
      * Además, se establece una relación bidireccional con el controlador de la segunda pantalla.(Aunque solo se usa de forma unidericcional)
      */
+    public static boolean cambiarEstadoNocheDia(boolean cambio ) {
+        noche=cambio;
+        return noche;
+    }
 
     @FXML
     protected void initialize() {
         // Cargar datos desde la base de datos
         cargarDatos();
-        SegundaPantallaControlador.controladorPantalla2=controlador;
+        SegundaPantallaControlador.controladorPantalla2 = controlador;
 
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
-
-
-
-
+        Mecanico.delay(3000);
+        actualizarEstiloNocturno();
     }
 
     /**
@@ -419,7 +423,7 @@ public class Controlador {
      *
      */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
-        Mecanico.crearImagenes(botonClaroOscuro,fondo);
+        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
 
     /**
@@ -436,6 +440,12 @@ public class Controlador {
      */
     private boolean validarRol(String rol) {
         return rol.equalsIgnoreCase("chapista") || rol.equalsIgnoreCase("soldador") || rol.equalsIgnoreCase("pintor");
+    }
+
+
+    private void actualizarEstiloNocturno() {
+        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        // Aquí puedes realizar otras actualizaciones de estilo según el modo nocturno
     }
 
 }
