@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -64,7 +65,7 @@ public class SegundaPantallaControlador {
     private TextField nominaTextField;
 
     @FXML
-    private TextField horarioTextField;
+    private DatePicker horarioTextField;
 
     @FXML
     private TextField nussTextField;
@@ -146,8 +147,15 @@ public class SegundaPantallaControlador {
         if (!llamarAlertaSiInvalido(!nomina.isEmpty(), "Por favor, ingrese un valor para 'Nómina'.")) {
             return;
         }
-        String fecha = horarioTextField.getText().trim();
-        if (!llamarAlertaSiInvalido(!fecha.isEmpty(), "Por favor, ingrese un valor para 'Fecha'.") || !validarFecha(fecha)) {
+        String fecha = String.valueOf(horarioTextField.getValue());
+        if (fecha == null || fecha.isEmpty()) {
+            mostrarAlerta("Error", "Por favor, seleccione una fecha para 'Horario'.");
+            return;
+        }
+
+        // Continuar con la validación de la fecha
+        if (!validarFecha(fecha)) {
+            mostrarAlerta("Error", "La fecha seleccionada no es válida. Por favor, elija una fecha válida.");
             return;
         }
 
