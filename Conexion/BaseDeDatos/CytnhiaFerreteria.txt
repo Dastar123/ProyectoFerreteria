@@ -564,3 +564,41 @@ BEGIN
                  WHERE reparacion.idMecanico = p_idMecanico;
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION insertar_en_clientes_vehiculos_desde_cliente()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO clientes_vehiculos(matricula, idCliente)
+    VALUES (NEW.matricula, NEW.idCliente);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+--------------------------------------------------------
+CREATE TRIGGER trigger_insertar_en_clientes_vehiculos_desde_cliente
+AFTER INSERT ON clientes
+FOR EACH ROW
+EXECUTE FUNCTION insertar_en_clientes_vehiculos_desde_cliente();
+-------------------------------------------------------------------
+
+-- Trigger para insertar en clientes_vehiculos cuando se inserta un vehículo
+CREATE OR REPLACE FUNCTION insertar_en_clientes_vehiculos_desde_vehiculo()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO clientes_vehiculos(matricula)
+    VALUES (NEW.matricula);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+------------------------------------------------
+
+CREATE TRIGGER trigger_insertar_en_clientes_vehiculos_desde_vehiculo
+AFTER INSERT ON vehiculos
+FOR EACH ROW
+EXECUTE FUNCTION insertar_en_clientes_vehiculos_desde_vehiculo();

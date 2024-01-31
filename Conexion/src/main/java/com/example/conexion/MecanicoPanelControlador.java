@@ -481,4 +481,20 @@ public class MecanicoPanelControlador {
         MecanicoObjeto mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
         cargarDatosDeMecanicoSeleccionado(mecanicoSeleccionado);
     }
+
+    @FXML
+    protected void InicioSesion() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InicioSesion.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Inicio de Sesión");
+        stage.setScene(new Scene(root));
+        stage.show();
+        cerrarVentana();
+    }
+    private void cerrarVentana() {
+        Stage stage = (Stage) botonClaroOscuro.getScene().getWindow();
+        stage.close();
+    }
+
 }

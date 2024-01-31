@@ -63,5 +63,6 @@
             <Font name="System Bold" size="26.0" />
          </font>
       </Label>
+      <Button layoutX="470.0" layoutY="624.0" mnemonicParsing="false" onAction="#InicioSesion" style="-fx-background-color: transparent; -fx-underline-color: blue;" text="Cerrar Sesión" textAlignment="CENTER" textFill="#3e5bd0" underline="true" wrapText="true" />
    </children>
 </AnchorPane>
