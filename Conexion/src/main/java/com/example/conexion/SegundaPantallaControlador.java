@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -274,6 +277,22 @@ public class SegundaPantallaControlador {
     private void antesDeCerrarVentana() {
         controladorPantalla2.cargarDatos();
         conexion.desconectar();
+
+    }
+
+    public void VolverMec(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PrimeraPantalla.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = new Stage();
+
+        stage.setTitle("Panel mecanicos");
+        controladorPantalla2.cargarDatos();
+        conexion.desconectar();
+        cerrarVentana();
+
+        stage.setScene(new Scene(root));
+        stage.show();
+
 
     }
 }

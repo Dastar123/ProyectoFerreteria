@@ -6,12 +6,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="fondo" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.CrearCuentaAdminControlador">
    <children>
-      <Label layoutX="251.0" layoutY="33.0" text="Crear Cuenta">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="226.0" layoutY="25.0" prefHeight="38.0" prefWidth="170.0" text="Crear Cuenta" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Label>
       <Label layoutX="237.0" layoutY="78.0" text="Nombre de usuario">
@@ -27,7 +26,7 @@
       <TextField fx:id="CrearUsuario" layoutX="236.0" layoutY="127.0" />
       <TextField fx:id="CrearPass" layoutX="236.0" layoutY="215.0" />
       <Button layoutX="287.0" layoutY="259.0" mnemonicParsing="false" onAction="#crear" text="Crear" />
-      <Button fx:id="botonClaroOscuro" layoutX="510.0" layoutY="31.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
-      <Button layoutX="285.0" layoutY="295.0" mnemonicParsing="false" onAction="#Volver" text="Volver" />
+      <Button fx:id="botonClaroOscuro" layoutX="553.0" layoutY="20.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Button layoutX="259.0" layoutY="312.0" mnemonicParsing="false" onAction="#Volver" style="-fx-background-color: transparent; -fx-underline-color: blue;" text="Inicio De Sesión" textFill="#3e5bd0" underline="true" />
    </children>
 </AnchorPane>

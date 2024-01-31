@@ -6,29 +6,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane fx:id="fondo" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.InicioSesionControlador">
    <children>
       <Button fx:id="botonClaroOscuro" layoutX="553.0" layoutY="20.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
-      <Label layoutX="215.0" layoutY="18.0" text="INICIO DE SESIÓN">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="25.0" prefHeight="38.0" prefWidth="233.0" text="INICIO DE SESIÓN" textAlignment="CENTER">
          <font>
-            <Font name="System Bold" size="20.0" />
+            <Font name="System Bold" size="26.0" />
          </font>
       </Label>
-      <Label layoutX="227.0" layoutY="68.0" text="Nombre de usuario">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="258.0" layoutY="166.0" text="Contraseña">
+      <Label layoutX="237.0" layoutY="78.0" text="Nombre de usuario">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="NombreField" layoutX="226.0" layoutY="117.0" />
-      <TextField fx:id="contraField" layoutX="226.0" layoutY="205.0" />
-      <Label layoutX="258.0" layoutY="293.0" text="¿No tienes una?" />
-      <Button layoutX="258.0" layoutY="310.0" mnemonicParsing="false" onAction="#CambiarPantalla" style="-fx-background-color: transparent; -fx-underline-color: blue;" text="Crear cuenta" textAlignment="CENTER" textFill="#3e5bd0" underline="true" wrapText="true" />
-      <Button fx:id="EntrarButton" layoutX="277.0" layoutY="249.0" mnemonicParsing="false" onAction="#Comprobador" text="Entrar" />
+      <Label layoutX="268.0" layoutY="176.0" text="Contraseña">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="NombreField" layoutX="236.0" layoutY="127.0" />
+      <TextField fx:id="contraField" layoutX="236.0" layoutY="215.0" />
+      <Label layoutX="269.0" layoutY="293.0" text="¿No tienes una?" />
+      <Button layoutX="268.0" layoutY="310.0" mnemonicParsing="false" onAction="#CambiarPantalla" style="-fx-background-color: transparent; -fx-underline-color: blue;" text="Crear cuenta" textAlignment="CENTER" textFill="#3e5bd0" underline="true" wrapText="true" />
+      <Button fx:id="EntrarButton" layoutX="287.0" layoutY="259.0" mnemonicParsing="false" onAction="#Comprobador" text="Entrar" />
    </children>
 </AnchorPane>

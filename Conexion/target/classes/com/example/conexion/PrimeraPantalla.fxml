@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="fondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="663.0" prefWidth="1026.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.Controlador">
    <children>
@@ -25,32 +26,42 @@
             <TableColumn fx:id="nussJava" prefWidth="107.0" text="Nuss" />
         </columns>
       </TableView>
-      <Label layoutX="141.0" layoutY="290.0" styleClass="D:\Dad\Conexion\src\main\resources\Styles\style_day.css" text="Especialidad :" />
-      <Label layoutX="142.0" layoutY="339.0" text="Seguro :" />
-      <TextField fx:id="RolActualizar" layoutX="140.0" layoutY="306.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Especialidad" />
-      <Button layoutX="564.0" layoutY="618.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" />
-      <Button layoutX="455.0" layoutY="587.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" />
-      <Button layoutX="361.0" layoutY="618.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" />
-      <Button fx:id="CambiarPantalla" layoutX="435.0" layoutY="618.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Segunda pantalla" />
-      <Label layoutX="500.0" layoutY="284.0" text="Horario Laboral" />
-      <Label layoutX="500.0" layoutY="330.0" text="Nombre" />
-      <Label layoutX="141.0" layoutY="381.0" text="Teléfono" />
-      <Label layoutX="499.0" layoutY="376.0" text="Calle" />
-      <Label layoutX="142.0" layoutY="428.0" text="Ciudad" />
-      <Label layoutX="140.0" layoutY="474.0" text="Contraseña" />
-      <Label layoutX="499.0" layoutY="474.0" text="Código Postal" />
-      <Label layoutX="450.0" layoutY="527.0" text="Nomina" />
-      <Label layoutX="499.0" layoutY="422.0" text="Nuss" />
-      <TextField fx:id="HorarioActualizar" layoutX="498.0" layoutY="301.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Horario Laboral" />
-      <TextField fx:id="SeguroActualizar" layoutX="141.0" layoutY="356.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Seguro" />
-      <TextField fx:id="NombreActualizar" layoutX="498.0" layoutY="347.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Nombre" />
-      <TextField fx:id="NumeroActualizar" layoutX="139.0" layoutY="396.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Teléfono" />
-      <TextField fx:id="CalleActualizar" layoutX="498.0" layoutY="391.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Calle" />
-      <TextField fx:id="CiudadActualizar" layoutX="141.0" layoutY="445.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Ciudad" />
-      <TextField fx:id="NussActualizar" layoutX="498.0" layoutY="436.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Nuss" />
-      <TextField fx:id="PassActualizar" layoutX="139.0" layoutY="491.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Contraseña" />
-      <TextField fx:id="CpActualizar" layoutX="498.0" layoutY="491.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Código Postal" />
-      <TextField fx:id="NominaActualizar" layoutX="448.0" layoutY="543.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Nomina" />
+      <Label layoutX="77.0" layoutY="342.0" styleClass="D:\Dad\Conexion\src\main\resources\Styles\style_day.css" text="Especialidad :" />
+      <Label layoutX="393.0" layoutY="342.0" text="Seguro :" />
+      <TextField fx:id="RolActualizar" layoutX="76.0" layoutY="358.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Especialidad" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="559.0" layoutY="586.0" mnemonicParsing="false" onAction="#eliminarMecanico" text="Eliminar" textAlignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="474.0" layoutY="586.0" mnemonicParsing="false" onAction="#llamarActualizar" text="Actualizar" textAlignment="CENTER" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="399.0" layoutY="586.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Insertar" textAlignment="CENTER" />
+      <Button fx:id="CambiarPantalla" alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="26.0" mnemonicParsing="false" onAction="#CambiarPantalla" text="Reparaciones" textAlignment="CENTER" />
+      <Label layoutX="235.0" layoutY="503.0" text="Horario Laboral :" />
+      <Label layoutX="78.0" layoutY="392.0" text="Nombre :" />
+      <Label layoutX="78.0" layoutY="442.0" text="Teléfono :" />
+      <Label layoutX="700.0" layoutY="342.0" text="Calle :" />
+      <Label layoutX="700.0" layoutY="392.0" text="Ciudad :" />
+      <Label layoutX="390.0" layoutY="392.0" text="Contraseña :" />
+      <Label layoutX="390.0" layoutY="442.0" text="Código Postal :" />
+      <Label layoutX="700.0" layoutY="442.0" text="Nomina :" />
+      <Label layoutX="535.0" layoutY="503.0" text="Nuss :" />
+      <TextField fx:id="HorarioActualizar" layoutX="233.0" layoutY="520.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Horario Laboral" />
+      <TextField fx:id="SeguroActualizar" layoutX="388.0" layoutY="358.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Seguro" />
+      <TextField fx:id="NombreActualizar" layoutX="77.0" layoutY="408.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Nombre" />
+      <TextField fx:id="NumeroActualizar" layoutX="76.0" layoutY="458.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Teléfono" />
+      <TextField fx:id="CalleActualizar" layoutX="700.0" layoutY="358.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Calle" />
+      <TextField fx:id="CiudadActualizar" layoutX="700.0" layoutY="408.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Ciudad" />
+      <TextField fx:id="NussActualizar" layoutX="535.0" layoutY="520.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Nuss" />
+      <TextField fx:id="PassActualizar" layoutX="389.0" layoutY="408.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Contraseña" />
+      <TextField fx:id="CpActualizar" layoutX="389.0" layoutY="458.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice el Código Postal" />
+      <TextField fx:id="NominaActualizar" layoutX="700.0" layoutY="458.0" prefHeight="25.0" prefWidth="250.0" promptText="Actualice la Nomina" />
       <Button fx:id="botonClaroOscuro" layoutX="957.0" layoutY="14.0" mnemonicParsing="false" onAction="#llamarcambiarClaroOscuro" prefHeight="17.0" prefWidth="26.0" style="-fx-background-color: transparent;" textAlignment="CENTER" textFill="TRANSPARENT" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="19.0" text="Ver Servicios" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="19.0" layoutY="297.0" text="Editar Mecánico" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
