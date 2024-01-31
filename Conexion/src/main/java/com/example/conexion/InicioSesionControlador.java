@@ -41,10 +41,10 @@ public class InicioSesionControlador {
     }
 
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent) {
-        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
+        MecanicoObjeto.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
     public void actualizarEstiloNocturno() {
-        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        MecanicoObjeto.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
 
     }
 
@@ -63,11 +63,11 @@ public class InicioSesionControlador {
 
     @FXML
     protected void EntrarMecanico() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PrimeraPantalla.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PanelAdmin.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
 
-        stage.setTitle("Panel mecanicos");
+        stage.setTitle("Panel Admin");
         cerrarVentana();
 
         stage.setScene(new Scene(root));

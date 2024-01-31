@@ -41,10 +41,10 @@ public class CrearCuentaAdminControlador {
     }
 
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent) {
-        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
+        MecanicoObjeto.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
     private void actualizarEstiloNocturno() {
-        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        MecanicoObjeto.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
 
     }
 
@@ -55,7 +55,7 @@ public class CrearCuentaAdminControlador {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("InicioSesion.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setTitle("Insertar mecanicos");
+        stage.setTitle("Inicio de  sesión");
 
 
         stage.setScene(new Scene(root));

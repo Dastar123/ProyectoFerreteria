@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="fondo" prefHeight="501.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.SegundaPantallaControlador">
+<AnchorPane fx:id="fondo" prefHeight="501.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.conexion.InsertMecanicoControlador">
    <children>
       <Button fx:id="UpdateButton" layoutX="306.0" layoutY="400.0" mnemonicParsing="false" onAction="#insertarMecanico" text="Aceptar" />
       <TextField fx:id="rolTextField" layoutX="53.0" layoutY="73.0" prefHeight="25.0" prefWidth="310.0" promptText="Introduzca su Especialidad" />

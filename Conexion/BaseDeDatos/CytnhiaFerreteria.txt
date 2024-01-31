@@ -541,3 +541,26 @@ $$ LANGUAGE plpgsql;
 *Y otra función para relacionar la tabla de reparaciones y servicios por el id mecanico
 *Crear un objeto para las sentencias de las Base de datos
 */
+
+CREATE OR REPLACE FUNCTION relacionar_reparacion_servicios(p_idMecanico INT)
+RETURNS TABLE (
+    idServicio INT,
+    descripcion CHAR VARYING(100),
+    costo DOUBLE PRECISION,
+    tiempo DOUBLE PRECISION,
+    fecha DATE,
+    estado CHAR VARYING(50)
+)
+AS $$
+BEGIN
+    RETURN QUERY SELECT servicios.idServicios,
+                        servicios.descripcion,
+                        servicios.costo,
+                        servicios.tiempo,
+                        reparacion.fecha,
+                        reparacion.estado
+                 FROM reparacion
+                 INNER JOIN servicios ON reparacion.idServicio = servicios.idServicios
+                 WHERE reparacion.idMecanico = p_idMecanico;
+END;
+$$ LANGUAGE plpgsql;

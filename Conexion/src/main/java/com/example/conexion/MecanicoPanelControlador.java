@@ -2,11 +2,9 @@ package com.example.conexion;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -25,7 +23,7 @@ import java.sql.*;
  *
  */
 
-public class Controlador {
+public class MecanicoPanelControlador {
 
     public AnchorPane fondo;
     public TextField RolActualizar;
@@ -39,21 +37,21 @@ public class Controlador {
     public TextField PassActualizar;
     public TextField CpActualizar;
     public TextField NominaActualizar;
-    private Controlador controlador = this;
+    private MecanicoPanelControlador controlador = this;
     @FXML
-    public TableColumn<Mecanico, String> idJava;
-    public TableColumn<Mecanico, String> RolJava;
-    public TableColumn<Mecanico, String> horasJava;
-    public TableColumn<Mecanico, String> SeguroJava;
-    public TableView<Mecanico> EmpleadosContendor;
-    public TableColumn<Mecanico, String> nombreJava;
-    public TableColumn<Mecanico, String> NumeroJava;
-    public TableColumn<Mecanico, String> CalleJava;
-    public TableColumn<Mecanico, String> CiudadJava;
-    public TableColumn<Mecanico, String> PassJava;
-    public TableColumn<Mecanico, String> CpJava;
-    public TableColumn<Mecanico, String> nussJava;
-    public TableColumn<Mecanico, String> NominaJava;
+    public TableColumn<MecanicoObjeto, String> idJava;
+    public TableColumn<MecanicoObjeto, String> RolJava;
+    public TableColumn<MecanicoObjeto, String> horasJava;
+    public TableColumn<MecanicoObjeto, String> SeguroJava;
+    public TableView<MecanicoObjeto> EmpleadosContendor;
+    public TableColumn<MecanicoObjeto, String> nombreJava;
+    public TableColumn<MecanicoObjeto, String> NumeroJava;
+    public TableColumn<MecanicoObjeto, String> CalleJava;
+    public TableColumn<MecanicoObjeto, String> CiudadJava;
+    public TableColumn<MecanicoObjeto, String> PassJava;
+    public TableColumn<MecanicoObjeto, String> CpJava;
+    public TableColumn<MecanicoObjeto, String> nussJava;
+    public TableColumn<MecanicoObjeto, String> NominaJava;
 
     public Button botonClaroOscuro;
     Conexion conexion = new Conexion();
@@ -72,7 +70,7 @@ public class Controlador {
     protected void initialize() {
         // Cargar datos desde la base de datos
         cargarDatos();
-        SegundaPantallaControlador.controladorPantalla2 = controlador;
+        InsertMecanicoControlador.controladorPantalla2 = controlador;
         cambiarEstadoNocheDia(Iniciador.nochedia);
 
         Platform.runLater(() -> {
@@ -125,14 +123,14 @@ public class Controlador {
                      ResultSet resultSet = statement.executeQuery()) {
 
 
-                    ObservableList<Mecanico> listaMecanicos = FXCollections.observableArrayList();
+                    ObservableList<MecanicoObjeto> listaMecanicos = FXCollections.observableArrayList();
 
                     /**
                      *   Recorre los resultados y agregarlos a la lista
                       */
 
                     while (resultSet.next()) {
-                        Mecanico mecanico = new Mecanico(
+                        MecanicoObjeto mecanico = new MecanicoObjeto(
                                 resultSet.getString("idmecanico"),
                                 resultSet.getString("rol"),
                                 resultSet.getString("conthoras"),
@@ -175,7 +173,7 @@ public class Controlador {
     @FXML
     protected void CambiarPantalla() throws IOException {
         conexion.desconectar();
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("segundaPantalla.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MecanicoInsert.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setTitle("Insertar mecanicos");
@@ -191,7 +189,7 @@ public class Controlador {
      */
     @FXML
     protected void ActualizarMecanico() {
-        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+        MecanicoObjeto mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
 
         /**
          *  Muestra un mensaje de advertencia si no se ha seleccionado ningún mecanico
@@ -373,7 +371,7 @@ public class Controlador {
     @FXML
     protected void eliminarMecanico() {
 
-        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+        MecanicoObjeto mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
 
         if (mecanicoSeleccionado != null) {
 
@@ -406,7 +404,7 @@ public class Controlador {
      *
      * @param mecanico El objeto Mecanico que se eliminará de la base de datos y del TableView.
      */
-    private void eliminarMecanicoDeBaseDeDatos(Mecanico mecanico) {
+    private void eliminarMecanicoDeBaseDeDatos(MecanicoObjeto mecanico) {
         Conexion conexion = new Conexion();
         try (Connection con = conexion.conectar()) {
             if (con != null) {
@@ -431,7 +429,7 @@ public class Controlador {
      *
      */
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent){
-        Mecanico.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
+        MecanicoObjeto.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
 
     /**
@@ -452,7 +450,7 @@ public class Controlador {
 
 
     private void actualizarEstiloNocturno() {
-        Mecanico.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
+        MecanicoObjeto.crearImagenes(botonClaroOscuro, fondo, Iniciador.isModoNocturno());
 
     }
     /**
@@ -460,7 +458,7 @@ public class Controlador {
      *
      * @param mecanico El mecánico seleccionado.
      */
-    private void cargarDatosDeMecanicoSeleccionado(Mecanico mecanico) {
+    private void cargarDatosDeMecanicoSeleccionado(MecanicoObjeto mecanico) {
         if(mecanico!=null){
             RolActualizar.setText(mecanico.getRol());
             HorarioActualizar.setText(String.valueOf(mecanico.getHoras()));
@@ -480,7 +478,7 @@ public class Controlador {
 
     @FXML
     private void llamarDatosMecanico(){
-        Mecanico mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
+        MecanicoObjeto mecanicoSeleccionado = EmpleadosContendor.getSelectionModel().getSelectedItem();
         cargarDatosDeMecanicoSeleccionado(mecanicoSeleccionado);
     }
 }
