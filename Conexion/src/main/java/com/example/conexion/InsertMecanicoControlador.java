@@ -161,8 +161,7 @@ public class InsertMecanicoControlador {
 
         try (Connection con = conexion.conectar()) {
             if (con != null) {
-                String sql = "INSERT INTO mecanico (rol, contHoras, seguro, empleados)\n" +
-                        "VALUES (?::especialidad,?,?, ROW(Row( ?, ROW(?, ?, ?, ?)),?,?,?::date,?)::empleados_type);";
+                String sql =SentenciasSQL.insertarMecanico;
 
                 try (PreparedStatement statement = con.prepareStatement(sql)) {
                     /**

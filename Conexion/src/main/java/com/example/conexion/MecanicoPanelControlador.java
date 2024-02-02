@@ -103,21 +103,7 @@ public class MecanicoPanelControlador {
                  *  Realizar la consulta
                   */
 
-                String sql = "SELECT " +
-                        "mecanico.idmecanico, " +
-                        "mecanico.rol, " +
-                        "mecanico.conthoras, " +
-                        "mecanico.seguro, " +
-                        "((mecanico.empleados).persona).nombre AS nombre, " +
-                        "(((mecanico.empleados).persona).direccion).num AS num, " +
-                        "(((mecanico.empleados).persona).direccion).calle AS calle, " +
-                        "(((mecanico.empleados).persona).direccion).ciudad AS ciudad, " +
-                        "(((mecanico.empleados).persona).direccion).cp AS cp, " +
-                        "((mecanico.empleados).pass) AS pass, " +
-                        "((mecanico.empleados).nomina) AS nomina, " +
-                        "((mecanico.empleados).horario) AS horario, " +
-                        "((mecanico.empleados).nuss) AS nuss " +
-                        "FROM mecanico";
+                String sql =SentenciasSQL.mecanicoParametros;
 
                 try (PreparedStatement statement = con.prepareStatement(sql);
                      ResultSet resultSet = statement.executeQuery()) {
