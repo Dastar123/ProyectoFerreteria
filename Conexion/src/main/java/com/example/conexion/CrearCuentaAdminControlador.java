@@ -103,7 +103,7 @@ public class CrearCuentaAdminControlador {
         conexion.conectar();
         try (Connection con = conexion.conectar()) {
             if (con != null) {
-                String sql = "SELECT * FROM buscar_controlador(?)";
+                String sql = SentenciasSQL.buscarAdmin;
                 try (PreparedStatement statement = con.prepareStatement(sql)) {
                     statement.setString(1, nombreUsuario);
                     try (ResultSet resultado = statement.executeQuery()) {
@@ -123,7 +123,7 @@ public class CrearCuentaAdminControlador {
         conexion.conectar();
         try (Connection con = conexion.conectar()) {
             if (con != null) {
-                String sql = "INSERT INTO controlador (nombreUsuario, contraseña) VALUES (?, ?)";
+                String sql = SentenciasSQL.crearAdmin;
                 try (PreparedStatement statement = con.prepareStatement(sql)) {
                     statement.setString(1, nombreUsuario);
                     statement.setString(2, contraseña);
