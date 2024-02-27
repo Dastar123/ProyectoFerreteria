@@ -13,10 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class CrearCuentaAdminControlador {
     public TextField CrearPass;
@@ -38,8 +35,10 @@ public class CrearCuentaAdminControlador {
             actualizarEstiloNocturno();
             actualizarEstiloNocturno();
         });
-    }
 
+
+
+    }
     public void llamarcambiarClaroOscuro(ActionEvent actionEvent) {
         MecanicoObjeto.crearImagenes(botonClaroOscuro,fondo, cambiarEstadoNocheDia(Iniciador.nochedia));
     }
@@ -155,5 +154,37 @@ public class CrearCuentaAdminControlador {
         stage.setScene(new Scene(root));
         stage.show();
         cerrarVentana();
+    }
+
+    @FXML
+    private void DevolverMecanico(){
+        try {
+
+            conexion.conectar();
+
+            // Ejecutar una consulta
+            String consulta = "SELECT * FROM motos";
+
+            try (Connection con = conexion.conectar();
+                 PreparedStatement statement = con.prepareStatement(consulta);
+                 ResultSet resultado = statement.executeQuery()) {
+
+                // Procesar resultados (por ejemplo, imprimirlos)
+                while (resultado.next()) {
+                    System.out.println(resultado.getString("matricula"));
+                    System.out.println(resultado.getString("marca"));
+                    // Procesar otras columnas según sea necesario
+                }
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } finally {
+                // Cerrar recursos (la conexión se cierra automáticamente al salir del bloque try-with-resources)
+                conexion.desconectar();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -105,6 +105,13 @@ public class InicioSesionControlador {
             }
         }
     }
+
+    /**
+     * Como se usa la funcion
+     * @param nombreUsuario
+     * @param password
+     * @return
+     */
     private boolean verificarUsuario(String nombreUsuario, String password) {
         conexion.conectar();
         try (Connection con = conexion.conectar()) {
